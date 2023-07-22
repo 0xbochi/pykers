@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  pykers:
+    image: pykers:latest
+    build: .
+    container_name: pykers-web
+    command: gunicorn -b 0.0.0.0:5000 run:app
+    volumes:
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /media/share:/media/share
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production

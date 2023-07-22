@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - Pykers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='styles.css') }}">
+</head>
+<body class="bg-dark text-white">
+    <div class="container">
+        <h1 class="text-center my-4">Welcome to Pykers</h1>
+        <div id="container-list" class="row"></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('home.static', filename='main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Container Details - Pykers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('container.static', filename='styles.css') }}">
+</head>
+<body class="bg-dark text-white">
+
+    <div class="navbar-container">
+        <a href="/home"> Back to home</a>
+    </div>
+    
+    
+
+    <div class="spinner-grow text-light" id="loading-spinner" style="display: none;" role="status">
+        <span class="sr-only"></span>
+      </div>
+      
+    <div class="container">
+        <h1 class="text-center my-4">Container Details</h1>
+        <div id="container-details">
+            <table class="table table-dark">
+                <tbody>
+                    <tr><td>Name</td><td id="container-name"></td></tr>
+                    <tr><td>Status</td><td id="container-status"></td></tr>
+                    <tr><td>Image</td><td id="container-image"></td></tr>
+                    <tr><td>Command</td><td id="container-command"></td></tr>
+                    <tr><td>Created</td><td id="container-created"></td></tr>
+                    <tr><td>ID</td><td id="container-id"></td></tr>
+                    <tr><td>Networks</td><td id="container-networks"></td></tr>
+                    <tr><td>Mounts</td><td id="container-mounts"></td></tr>
+                    <tr><td>Ports</td><td id="container-ports"></td></tr>
+                    <tr><td>Environment</td><td id="container-environment"></td></tr>
+                </tbody>
+            </table>
+        </div>
+     
+        <div class="d-flex justify-content-center my-4">
+            <button id="start-button" class="btn btn-success mx-2">Start</button>
+            <button id="stop-button" class="btn btn-warning mx-2">Stop</button>
+            <button id="restart-button" class="btn btn-primary mx-2">Restart</button>
+            <button id="remove-button" class="btn btn-danger mx-2">Remove</button>
+            <button id="logs-button" class="btn btn-info mx-2" data-toggle="modal" data-target="#logs-modal">Show Logs</button>
+            <button id="stats-button" class="btn btn-info mx-2" data-toggle="modal" data-target="#stats-modal">Show Stats</button>
+            <button id="exec-button" class="btn btn-info mx-2" data-target="modal" data-target="#exec-modal">Execute Command</button>
+            <button id="inspect-button" class="btn btn-info mx-2" data-target="modal" data-target="#inspect-modal">Inspect</button>
+            <button id="copy-button" class="btn btn-info mx-2" data-target="modal" data-target="#copy-modal">Copy File</button>
+
+
+        
+        </div>
+    </div>
+
+    <!-- Logs Modal -->
+    <div class="modal" id="logs-modal" tabindex="-1" role="dialog" aria-labelledby="logsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary" id="logsModalLabel">Container Logs</h5>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <pre id="logs-content"></pre>
+                </div>
+                <div class="modal-footer">
+                  </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Modal -->
+    <div class="modal fade" id="stats-modal" tabindex="-1" role="dialog" aria-labelledby="statsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary" id="statsModalLabel">Container Stats</h5>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <pre id="stats-content"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Exec Modal -->
+
+    <div class="modal" id="exec-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-dark">Execute Command</h5>
+            </div>
+            <div class="modal-body">
+                <form id="exec-form">
+                <div class="form-group pb-2 text-dark">
+                    <label for="command">Command:</label>
+                    <input type="text" class="form-control" id="command" name="command" autocomplete="off">
+                </div>
+                <button type="submit" class="btn btn-danger">EXEC</button>
+                </form>
+                <pre class="text-dark" id="exec-output"></pre>
+            </div>
+            </div>
+        </div>
+        </div>
+
+    <!-- Inspect Modal -->
+
+    <div class="modal fade" id="inspect-modal" tabindex="-1" role="dialog" aria-labelledby="statsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark">Inspect Container</h5>
+                </div>
+                <div class="modal-body text-dark">
+                    <pre id="inspect-output"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copy Modal -->
+
+    <div class="modal" id="copy-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark">Copy File</h5>
+                </div>
+                <div class="modal-body text-dark">
+                    <form id="copy-form">
+                        <div class="form-group text-dark pb-2">
+                            <label for="src_path">Source Path:</label>
+                            <input type="text" class="form-control" id="src_path" name="src_path" autocomplete="off">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="{{ url_for('container.static', filename='main.js') }}"></script>
+</body>
+</html>
