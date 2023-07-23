@@ -119,7 +119,7 @@ def copy(id):
     try:
         c = client.containers.get(id)
         src_path = request.form.get('src_path')
-        dest_path = '/media/share'
+        dest_path = '/tmp'
         
 
         file_name = os.path.basename(src_path)
