@@ -135,7 +135,7 @@ def copy(id):
             for chunk in tar_stream:
                 file.write(chunk)
 
-        return jsonify({'message': 'File copied successfully.'}), 200
+        return jsonify({'message': 'File copied successfully in /tmp on your local machine.'}), 200
     except NotFound:
         return "Container not found", 404
     except Exception as e:
