@@ -25,3 +25,8 @@ body {
     padding: 0 !important;
     margin: 0 !important;
  }
+
+#shared_port{
+    border-right : 2px solid white !important;
+    
+}
