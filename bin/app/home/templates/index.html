@@ -11,7 +11,7 @@
         <h1 class="text-center my-4">Welcome to Pykers</h1>
 
         Active images:
-        <div class="p-3 bg-warning bg-opacity-10 border border-info border-start-0 rounded-end">
+        <div class="p-3 bg-warning bg-opacity-10 border border-info border-start-0 rounded">
             <span class="badge text-bg-primary bg-primary">MON Image
 
 
@@ -42,27 +42,40 @@
 
         <!-- start of shared ports / mounted volumes banner -->
         <div class="pt-5">
-            <div class="p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">
+            <div class="p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded">
 
                     <div class="row">
                         
                     <!-- shared ports section -->
                       <div class="col">
                         <div>
-                            shared ports:
+                            <b>shared ports:</b>
                         </div>
                         <div class="text-center">
                             aa
+                        </div>
+
+                        <!-- ALL shared port -->
+                        <div class="text-right">
+                            <span class="badge rounded-pill bg-warning text-dark">ALL</span>
+                            
                         </div>
                       </div>
 
                       <!-- mounted volumes section -->
                       <div class="col">
-                        <div>
-                            mounted volumes:
-                        </div>
-                        <div class="text-center">
-                            aa
+                            <div>
+                                <b>mounted volumes:</b>
+                            </div>
+
+                            <div class="text-center">
+                                aa
+                            </div>
+
+                        <!-- ALL mounted volumes -->
+                        <div class="text-right">
+                            <span class="badge rounded-pill bg-warning text-dark">ALL</span>
+                            
                         </div>
                       </div>
             
@@ -74,11 +87,25 @@
         </div>
 
         
-          
 
-        <div class="pt-3">
-            <button id="create-container-button" class="btn btn-warning" >Create Container</button>
-        </div>
+        <!-- CONTAINER PART   -->
+
+
+
+
+        <div class="container">
+            <div class="row">
+              <div class="col-2">
+                <button id="create-container-button" class="btn btn-warning" >New Container</button>
+              </div>
+              <div class="col-8 text-center">
+                <div class="d-inline-block text-center"><H3>Containers</H3></div>
+              </div>
+              <div class="col-2">
+              </div>
+
+            </div>
+          </div>
         
         <div id="container-list" class="row"></div>
     </div>
