@@ -9,7 +9,77 @@
     <div class="container">
         
         <h1 class="text-center my-4">Welcome to Pykers</h1>
-        <button id="create-container-button" class="btn btn-warning" >Create Container</button>
+
+        Active images:
+        <div class="p-3 bg-warning bg-opacity-10 border border-info border-start-0 rounded-end">
+            <span class="badge text-bg-primary bg-primary">MON Image
+
+
+                <span class="badge rounded-pill text-bg-info bg-info">latest</span>
+            </span>
+            
+
+            <span class="badge text-bg-primary bg-primary">MON Image
+
+
+                <span class="badge rounded-pill text-bg-info bg-info">latest</span>
+            </span>
+
+
+            <!-- right aligned ALL images -->
+            <div class="float-right">
+                <button type="button" class="btn btn-primary position-relative ">
+                    All images
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger ">
+                    
+                    <span class="visually-hidden">10</span>
+                    </span>
+                </button>
+            </div>
+        
+        </div>
+        <!-- end of images banner             -->
+
+        <!-- start of shared ports / mounted volumes banner -->
+        <div class="pt-5">
+            <div class="p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">
+
+                    <div class="row">
+                        
+                    <!-- shared ports section -->
+                      <div class="col">
+                        <div>
+                            shared ports:
+                        </div>
+                        <div class="text-center">
+                            aa
+                        </div>
+                      </div>
+
+                      <!-- mounted volumes section -->
+                      <div class="col">
+                        <div>
+                            mounted volumes:
+                        </div>
+                        <div class="text-center">
+                            aa
+                        </div>
+                      </div>
+            
+
+
+
+                
+            </div>
+        </div>
+
+        
+          
+
+        <div class="pt-3">
+            <button id="create-container-button" class="btn btn-warning" >Create Container</button>
+        </div>
+        
         <div id="container-list" class="row"></div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
