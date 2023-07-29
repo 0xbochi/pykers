@@ -10,3 +10,23 @@ body {
 .image-text {
     font-size: 0.8rem;
 }
+
+#container-details {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+#container-details button {
+    margin: 1em 0; /* Ajoutez de l'espace en haut et en bas du bouton */
+}
+
+/* Autres règles CSS */
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+ }
+
+#shared_port{
+    border-right : 2px solid white !important;
+    
+}

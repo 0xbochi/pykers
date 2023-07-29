@@ -35,3 +35,6 @@ build/
 *.egg-info/
 
 .vscode
+
+pykers-env/
+pykers-env/*

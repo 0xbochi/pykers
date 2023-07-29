@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Container - Pykers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('create.static', filename='styles.css') }}">
+</head>
+<body class="bg-dark text-white">
+
+    <div class="navbar-container">
+        <a href="/home">Back to home</a>
+    </div>
+
+    <div class="container text-dark">
+        <h1 class="text-center my-4">Create Container</h1>
+        <form id="create-form" class="text-dark">
+            <div class="step active" id="step1">
+                <div class="form-group">
+                    <label for="image">Image:</label>
+                    <input type="text" class="form-control" id="image" name="image">
+                    <small class="form-text text-muted">Example: nginx:latest</small>
+                </div>
+            </div>
+            <div class="step" id="step2">
+                <div class="form-group">
+                    <label for="env_vars">Environment Variables:</label>
+                    <input type="text" class="form-control" id="env_vars" name="env_vars">
+                    <small class="form-text text-muted">Example: KEY1=VALUE1,KEY2=VALUE2</small>
+                </div>
+            </div>
+            <div class="step" id="step3">
+                <div class="form-group">
+                    <label for="volumes">Volumes:</label>
+                    <input type="text" class="form-control" id="volumes" name="volumes">
+                    <small class="form-text text-muted">Example: /host/path:/container/path</small>
+                </div>
+            </div>
+            <div class="step" id="step4">
+                <div class="form-group">
+                    <label for="ports">Ports:</label>
+                    <input type="text" class="form-control" id="ports" name="ports">
+                    <small class="form-text text-muted">Example: 80:8080</small>
+                </div>
+            </div>
+            <!-- Add more steps as needed -->
+            <input type="submit" value="Next" class="btn btn-primary">
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('create.static', filename='main.js') }}"></script>
+</body>
+</html>
