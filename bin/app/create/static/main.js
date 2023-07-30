@@ -18,7 +18,7 @@ $(document).ready(function() {
         } else {
            
             var formData = {
-                'image': $('input[name=image]').val(),
+                'image': $('#image-selector').val(),
                 'env_vars': $('input[name=env_vars]').val(),
                 'volumes': $('input[name=volumes]').val(),
                 'ports': $('input[name=ports]').val(),
@@ -26,7 +26,6 @@ $(document).ready(function() {
                 'mem_limit': $('input[name=mem_limit]').val(),
                 'name': $('input[name=name]').val()
             };
-
 
             $.ajax({
                 type: 'POST',

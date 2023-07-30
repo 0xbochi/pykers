@@ -6,6 +6,7 @@ client = DockerClient.from_env()
 
 
 def index():
+    images = [img.tags[0] for img in client.images.list() if img.tags]
     if request.method == 'POST':
 
         image = request.form.get('image')
@@ -28,6 +29,8 @@ def index():
         mem_limit = request.form.get('mem_limit')
         name = request.form.get('name')
 
+        print("image", image)
+
 
         container = client.containers.create(
             image,
@@ -45,5 +48,7 @@ def index():
 
         return redirect(url_for('container.details', id=container.id))
 
-    return render_template('create.html')
+    return render_template('create.html', images=images)
+
+
 

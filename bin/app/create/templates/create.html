@@ -16,9 +16,15 @@
         <form id="create-form" class="text-dark">
             <div class="step active" id="step1">
                 <div class="form-group">
+                    <label for="name">Container name:</label>
+                    <input type="text" class="form-control" id="name" name="name" autocomplete='off'>
+
                     <label for="image">Image:</label>
-                    <input type="text" class="form-control" id="image" name="image">
-                    <small class="form-text text-muted">Example: nginx:latest</small>
+                    <select class="form-control" id="image-selector" name="image">
+                        {% for image in images %}
+                            <option value="{{ image }}">{{ image }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
             <div class="step" id="step2">
@@ -42,6 +48,8 @@
                     <small class="form-text text-muted">Example: 80:8080</small>
                 </div>
             </div>
+
+            
             <!-- Add more steps as needed -->
             <input type="submit" value="Next" class="btn btn-primary">
         </form>
