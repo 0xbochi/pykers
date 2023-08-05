@@ -12,6 +12,8 @@
     </div>
 
     <div class="container text-dark">
+        <input type="button" value="Back" id="back-button" class="btn btn-info" style="display : none;">
+
         <h1 class="text-center my-4">Create Container</h1>
         <form id="create-form" class="text-dark">
             <div class="step active" id="step1">
@@ -49,9 +51,17 @@
                 </div>
             </div>
 
+            <div class="step" id="step5" style="display: none;">
+                <div class="form-group">
+                    <label for="mem_limit">Memory Limit (example: 512m for 512MB, 1g for 1GB, etc):</label>
+                    <input type="text" class="form-control" id="mem_limit" name="mem_limit" placeholder="512m">
+                </div>
+            </div>
+            
+
             
             <!-- Add more steps as needed -->
-            <input type="submit" value="Next" class="btn btn-primary">
+            <input id="val-bt" type="submit" value="Next" class="btn btn-primary">
         </form>
     </div>
 

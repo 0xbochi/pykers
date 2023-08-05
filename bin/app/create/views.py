@@ -46,7 +46,9 @@ def index():
 
         container.start()
 
-        return redirect(url_for('container.details', id=container.id))
+        #return redirect(url_for('container.details', id=container.id))
+        return jsonify({'id': container.id}), 200
+
 
     return render_template('create.html', images=images)
 

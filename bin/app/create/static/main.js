@@ -1,13 +1,51 @@
 $(document).ready(function() {
     var currentStep = 1;
+    var totalSteps = 5;
 
     function showStep(step) {
         $('.step').hide();  
         $('#step' + step).show();  
+
+    
+        if (currentStep === totalSteps) {
+            $('#val-bt').prop('value', 'Create')
+            $('#val-bt').prop('class', 'btn btn-success')
+            $('#back-button').show();  
+        } else {
+            $('#val-bt').prop('value', 'next')
+            $('#val-bt').prop('class', 'btn btn-primary')
+            if (currentStep > 1) {
+                $('#back-button').show();  
+            } else {
+                $('#back-button').hide();  
+            }
+        }
     }
 
 
+
     showStep(currentStep);
+
+
+    $('#next-button').click(function(e) {
+        e.preventDefault();
+
+        if (currentStep < totalSteps) {  
+            currentStep++;
+            showStep(currentStep);
+        } 
+    });
+
+
+    $('#back-button').click(function(e) {
+        e.preventDefault();
+
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    });
+
 
     $('#create-form').submit(function(e) {
         e.preventDefault();
