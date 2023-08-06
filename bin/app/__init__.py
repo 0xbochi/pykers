@@ -1,3 +1,4 @@
+"""Main routing for the entire application"""
 from flask import Flask, redirect, url_for
 from app.home import home
 from app.container import container
@@ -12,6 +13,3 @@ app.register_blueprint(create, url_prefix='/create')
 @app.route('/')
 def root():
     return redirect(url_for('home.index'))
-
-
-
