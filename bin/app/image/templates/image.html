@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Images - Pykers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body class="bg-dark text-white">
+
+    <div class="navbar-container ">
+        <a href="/home"> Back to home</a>
+    </div>
+
+    <div class="container text-dark">
+        <h1 class="text-center my-4">Images</h1>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>Image Name</th>
+                    <th>Used By</th>
+                    <th>Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for image in images %}
+                <tr>
+                    <td>{{ image.name }}</td>
+                    <td>{{ image.used_by }}</td>
+                    
+                    <td>
+                        <button class="btn btn-primary">Pull</button>
+                        <button class="delete-image btn btn-danger" data-id="{{ image.id }}">Delete</button>
+
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="{{ url_for('image.static', filename='main.js') }}"></script>
+</body>
+</html>

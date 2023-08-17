@@ -1,0 +1,36 @@
+.navbar-container {
+    margin: 20px;
+    padding: 10px;
+    background-color: #2c3e50;
+    border-radius: 5px;
+}
+
+.container {
+    margin-top: 50px;
+    border: 1px solid #34495e;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #34495e;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #2c3e50;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.btn-primary, .btn-danger {
+    margin-right: 5px;
+}
