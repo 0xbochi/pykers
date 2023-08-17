@@ -12,18 +12,17 @@
 
         Active images:
         <div class="p-3 bg-warning bg-opacity-10 border border-info border-start-0 rounded">
-            <span class="badge text-bg-primary bg-primary">MON Image
+
+            {% for image in last_images %}
+            {% set split_tag = image.tags[0].split(":") %}
+            <span class="badge text-bg-primary bg-primary">{{ split_tag[0] }}
 
 
-                <span class="badge rounded-pill text-bg-info bg-info">latest</span>
+                <span class="badge rounded-pill text-bg-info bg-info"> {{ split_tag[1] if split_tag|length > 1 else 'latest' }}</span>
             </span>
-            
-
-            <span class="badge text-bg-primary bg-primary">MON Image
+            {% endfor %}
 
 
-                <span class="badge rounded-pill text-bg-info bg-info">latest</span>
-            </span>
 
 
             <!-- right aligned ALL images -->
@@ -32,7 +31,7 @@
                     All images
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger ">
                     
-                    <span class="visually-hidden">10</span>
+                    <span class="visually-hidden">{{ image_count }}</span>
                     </span>
                 </button>
             </div>
@@ -51,9 +50,13 @@
                         <div>
                             <b>shared ports:</b>
                         </div>
-                        <div class="text-center">
-                            8000:5000
-                        </div>
+                        
+                            {% for port in container_ports %}
+                            <div class="text-center">
+                                {{ port }}
+                            </div>
+                            {% endfor %}
+                        
 
                         <!-- ALL shared port -->
                         <div class="text-right">
@@ -68,12 +71,13 @@
                                 <b>mounted volumes:</b>
                             </div>
 
-                            <div class="text-center">
-                                /tmp/media:/home
-                            </div>
-                            <div class="text-center">
-                                /tmp/media:/home
-                            </div>
+                            {% for volume in container_volumes %}
+                                <div class="text-center">
+                                    {{ volume }}
+                                </div>
+                            {% endfor %}
+                            
+
 
                         <!-- ALL mounted volumes -->
                         <div class="text-right">

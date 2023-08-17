@@ -6,7 +6,25 @@ from docker.errors import ImageNotFound
 client = docker.from_env()
 
 def index():
-    return render_template('index.html')
+  
+    images = client.images.list()
+    last_images = images[-5:] if len(images) > 5 else images
+
+    containers = client.containers.list(all=False, limit=3)
+    container_ports = []
+    container_volumes = []
+    for container in containers:
+        mounts = container.attrs['Mounts']
+        for mount in mounts:
+            container_volumes.append(f"{mount['Source']}:{mount['Destination']}")
+            
+        ports = container.attrs['NetworkSettings']['Ports']
+        for k, v in ports.items():
+            if v:
+                container_ports.append(f"{v[0]['HostPort']}:{k.split('/')[0]}")
+
+
+    return render_template('index.html', image_count=len(images), last_images=last_images, container_ports=container_ports, container_volumes=container_volumes)
 
 def get_containers():
     containers = client.containers.list(all=True)
