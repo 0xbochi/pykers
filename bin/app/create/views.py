@@ -1,7 +1,7 @@
 """Views for create application"""
 from flask import render_template, request, jsonify, redirect, url_for
 from docker import DockerClient
-from docker.errors import NotFound
+from docker.errors import NotFound, ImageNotFound
 
 client = DockerClient.from_env()
 
@@ -17,6 +17,14 @@ def index() -> dict:
 
         image = request.form.get('image')
 
+        try:
+            client.images.get(image)
+        except ImageNotFound:
+            try:
+                client.images.pull(image)
+            except Exception as e:
+                return jsonify({'error': f"Failed to pull image {image}. Error: {str(e)}"}), 500
+
         env_vars_str = request.form.get('env_vars')
         env_vars = dict(item.split("=") for item in env_vars_str.split(",")) if env_vars_str else None
 
@@ -31,8 +39,6 @@ def index() -> dict:
 
         mem_limit = request.form.get('mem_limit')
         name = request.form.get('name')
-
-        print("image", image)
 
         container = client.containers.create(
             image,

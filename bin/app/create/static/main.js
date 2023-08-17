@@ -6,7 +6,6 @@ $(document).ready(function() {
         $('.step').hide();  
         $('#step' + step).show();  
 
-    
         if (currentStep === totalSteps) {
             $('#val-bt').prop('value', 'Create')
             $('#val-bt').prop('class', 'btn btn-success')
@@ -22,10 +21,15 @@ $(document).ready(function() {
         }
     }
 
+    function showSpinner() {
+        $('#loading-spinner').show();
+    }
 
+    function hideSpinner() {
+        $('#loading-spinner').hide();
+    }
 
     showStep(currentStep);
-
 
     $('#next-button').click(function(e) {
         e.preventDefault();
@@ -36,7 +40,6 @@ $(document).ready(function() {
         } 
     });
 
-
     $('#back-button').click(function(e) {
         e.preventDefault();
 
@@ -45,7 +48,6 @@ $(document).ready(function() {
             showStep(currentStep);
         }
     });
-
 
     $('#create-form').submit(function(e) {
         e.preventDefault();
@@ -65,6 +67,9 @@ $(document).ready(function() {
                 'name': $('input[name=name]').val()
             };
 
+            showSpinner();
+            
+
             $.ajax({
                 type: 'POST',
                 url: '/create',
@@ -72,16 +77,15 @@ $(document).ready(function() {
                 dataType: 'json',
                 encode: true
             }).done(function(data) {
+                hideSpinner();
 
                 if (data.error) {
- 
                     $('#error-message').text(data.error);
                 } else {
- 
                     window.location.href = '/container/' + data.id;
                 }
             }).fail(function(data) {
-
+                hideSpinner();
                 $('#error-message').text('An error occurred while trying to create the container.');
             });
         }

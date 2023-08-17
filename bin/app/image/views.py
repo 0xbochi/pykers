@@ -20,6 +20,7 @@ def image_view():
             "used_by": len(containers_using)
         })
 
+    images_info = sorted(images_info, key=lambda x: x["used_by"], reverse=True)
     return render_template('image.html', images=images_info)
 
 

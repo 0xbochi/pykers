@@ -22,11 +22,12 @@
                     <input type="text" class="form-control" id="name" name="name" autocomplete='off'>
 
                     <label for="image">Image:</label>
-                    <select class="form-control" id="image-selector" name="image">
+                    <input list="images" class="form-control" id="image-selector" name="image" autocomplete="off">
+                    <datalist id="images">
                         {% for image in images %}
-                            <option value="{{ image }}">{{ image }}</option>
+                            <option value="{{ image }}">
                         {% endfor %}
-                    </select>
+                    </datalist>
                 </div>
             </div>
             <div class="step" id="step2">
@@ -60,8 +61,12 @@
             
 
             
-            <!-- Add more steps as needed -->
+
             <input id="val-bt" type="submit" value="Next" class="btn btn-primary">
+            <div id="loading-spinner" class="spinner-border" role="status" style="display:none;">
+                <span class="sr-only">Loading...</span>
+            </div>
+            
         </form>
     </div>
 
