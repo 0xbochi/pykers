@@ -42,6 +42,7 @@ $(document).ready(function() {
 
     $('#back-button').click(function(e) {
         e.preventDefault();
+        $('#alert-container').hide();
 
         if (currentStep > 1) {
             currentStep--;
@@ -68,7 +69,7 @@ $(document).ready(function() {
             };
 
             showSpinner();
-            
+
 
             $.ajax({
                 type: 'POST',
@@ -80,13 +81,15 @@ $(document).ready(function() {
                 hideSpinner();
 
                 if (data.error) {
-                    $('#error-message').text(data.error);
+                    $('#alert-container').text(data.error).show();
+
                 } else {
                     window.location.href = '/container/' + data.id;
                 }
             }).fail(function(data) {
                 hideSpinner();
-                $('#error-message').text('An error occurred while trying to create the container.');
+                $('#alert-container').text('An error occurred while trying to create the container.').show();
+
             });
         }
     });

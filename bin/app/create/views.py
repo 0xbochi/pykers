@@ -1,7 +1,7 @@
 """Views for create application"""
 from flask import render_template, request, jsonify, redirect, url_for
 from docker import DockerClient
-from docker.errors import NotFound, ImageNotFound
+from docker.errors import NotFound, ImageNotFound, APIError 
 
 client = DockerClient.from_env()
 
@@ -45,20 +45,21 @@ def index() -> dict:
         name = request.form.get('name')
 
         print(volumes)
+        try:
+            container = client.containers.create(
+                image,
+                environment=env_vars,
+                volumes=volumes,
+                ports=ports,
+                links=links,
+                mem_limit=mem_limit,
+                name=name,
+                detach=True
+            )
 
-        container = client.containers.create(
-            image,
-            environment=env_vars,
-            volumes=volumes,
-            ports=ports,
-            links=links,
-            mem_limit=mem_limit,
-            name=name,
-            detach=True
-        )
-
-        container.start()
-
-        return jsonify({'id': container.id}), 200
+            container.start()
+            return jsonify({'id': container.id}), 200
+        except APIError as e:
+            return jsonify({'error': str(e)}), 400
 
     return render_template('create.html', images=images)
