@@ -17,11 +17,12 @@ def index():
         mounts = container.attrs['Mounts']
         for mount in mounts:
             container_volumes.append(f"{mount['Source']}:{mount['Destination']}")
-            
+
         ports = container.attrs['NetworkSettings']['Ports']
         for k, v in ports.items():
-            if v:
+            if v and isinstance(v, list) and len(v) > 0 and 'HostPort' in v[0]:
                 container_ports.append(f"{v[0]['HostPort']}:{k.split('/')[0]}")
+
 
 
     return render_template('index.html', image_count=len(images), last_images=last_images, container_ports=container_ports, container_volumes=container_volumes)

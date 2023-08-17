@@ -13,13 +13,18 @@
         Active images:
         <div class="p-3 bg-warning bg-opacity-10 border border-info border-start-0 rounded ">
 
+            {% set default_tag = ["default", "latest"] %}
+
             {% for image in last_images %}
-            {% set split_tag = image.tags[0].split(":") %}
-            <span class="badge text-bg-primary bg-primary">{{ split_tag[0] }}
-
-
-                <span class="badge rounded-pill text-bg-info bg-info"> {{ split_tag[1] if split_tag|length > 1 else 'latest' }}</span>
-            </span>
+                {% set split_tag = default_tag %}
+                {% if image.tags %}
+                    {% set split_tag = image.tags[0].split(":") %}
+                {% endif %}
+                <span class="badge text-bg-primary bg-primary">{{ split_tag[0] }}
+                    <span class="badge rounded-pill text-bg-info bg-info">
+                        {{ split_tag[1] if split_tag|length > 1 else 'latest' }}
+                    </span>
+                </span>
             {% endfor %}
 
 
