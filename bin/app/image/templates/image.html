@@ -6,9 +6,10 @@
 </head>
 <body class="bg-dark text-white">
 
-    <div class="navbar-container ">
-        <a href="/home"> Back to home</a>
+    <div class="back-container my-4">
+        <a href="/home" class="btn btn-light">Back to home</a>
     </div>
+    
 
     <div class="container text-dark">
         <h1 class="text-center my-4">Images</h1>
@@ -29,9 +30,14 @@
                     
                     <td>
                         <button class="btn btn-primary">Pull</button>
+                        {% if image.used_by > 0 %}
+                        <button class="delete-containers btn btn-warning" data-id="{{ image.id }}">Delete Containers</button>
+                        {% else %}
                         <button class="delete-image btn btn-danger" data-id="{{ image.id }}">Delete</button>
-
+                        {% endif %}
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
                     </td>
+                    
 
                 </tr>
                 {% endfor %}

@@ -34,3 +34,16 @@ tr:hover {
 .btn-primary, .btn-danger {
     margin-right: 5px;
 }
+.back-container {
+    text-align: center; 
+    margin-top: 20px;
+}
+
+.back-container .btn {
+    background-color: #007bff;
+    color: white;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+}

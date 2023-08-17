@@ -42,3 +42,17 @@ def delete_image():
         return jsonify({"message": "Image deleted successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+
+def delete_containers_for_image():
+    image_id = request.form.get('image_id')
+    containers = client.containers.list(all=True, filters={"ancestor": image_id})
+    
+    for container in containers:
+        try:
+            container.remove(force=True)
+        except Exception as e:
+            return jsonify(error=str(e)), 500
+    
+    return jsonify(success=True)
