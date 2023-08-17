@@ -29,7 +29,11 @@ def index() -> dict:
         env_vars = dict(item.split("=") for item in env_vars_str.split(",")) if env_vars_str else None
 
         volumes_str = request.form.get('volumes')
-        volumes = dict(item.split(":") for item in volumes_str.split(",")) if volumes_str else None
+        if volumes_str:
+            volume_list = volumes_str.split(",")
+            volumes = {item.split(":")[0]: {'bind': item.split(":")[1], 'mode': 'rw'} for item in volume_list}
+        else:
+            volumes = None
 
         ports_str = request.form.get('ports')
         ports = dict(item.split(":") for item in ports_str.split(",")) if ports_str else None
@@ -39,6 +43,8 @@ def index() -> dict:
 
         mem_limit = request.form.get('mem_limit')
         name = request.form.get('name')
+
+        print(volumes)
 
         container = client.containers.create(
             image,
