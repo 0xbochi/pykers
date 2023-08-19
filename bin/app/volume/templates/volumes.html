@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Volumes - Pykers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('volume.static', filename='styles.css') }}">
+</head>
+<body class="bg-dark text-white">
+
+<div class="navbar-container mb-3">
+    <a href="/home" class="btn btn-info">Back to home</a>
+</div>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Mounted Volumes</h1>
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th>Container Name</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for volume in volumes %}
+            <tr>
+                <td>{{ volume.name }}</td>
+                <td>{{ volume.source }}</td>
+                <td>{{ volume.destination }}</td>
+                <td><span class="{{ 'text-success' if volume.active else 'text-danger' }}">{{ "Active" if volume.active else "Inactive" }}</span></td>
+                <td><a href="/container/{{ volume.id }}" class="btn btn-warning">Go to Container</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</body>
+</html>
