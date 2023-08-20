@@ -100,18 +100,17 @@ def details_api(id: int) -> Union[dict, tuple]:
         except ImageNotFound:
             image_tag = "No image"
 
-        return jsonify({
-            'name': c.name,
-            'status': c.status,
-            'image': image_tag,
-            'command': ' '.join(c.attrs['Config']['Cmd']),
-            'created': c.attrs['Created'],
-            'id': c.id,
-            'networks': ', '.join(c.attrs['NetworkSettings']['Networks']),
-            'mounts': ', '.join([mount['Source'] for mount in c.attrs['Mounts']]),
-            'ports': ', '.join([f"{k}->{v[0]['HostPort']}" for k, v in c.attrs['NetworkSettings']['Ports'].items() if v is not None]),
-            'environment': ', '.join(c.attrs['Config']['Env'])
-        })
+        return jsonify({'name': c.name,
+                        'status': c.status,
+                        'image': image_tag,
+                        'command': ' '.join(c.attrs['Config']['Cmd']),
+                        'created': c.attrs['Created'],
+                        'id': c.id,
+                        'networks': ', '.join(c.attrs['NetworkSettings']['Networks']),
+                        'mounts': ', '.join([mount['Source'] for mount in c.attrs['Mounts']]),
+                        'ports': ', '.join([f"{k}->{v[0]['HostPort']}" for k,
+                                            v in c.attrs['NetworkSettings']['Ports'].items() if v is not None]),
+                        'environment': ', '.join(c.attrs['Config']['Env'])})
     except NotFound:
         return "Container not found", 404
 
@@ -236,7 +235,8 @@ def copy(id: int) -> Union[dict, tuple, tuple]:
             for chunk in tar_stream:
                 file.write(chunk)
 
-        return jsonify({'message': 'File copied successfully in /tmp on your local machine.'}), 200
+        return jsonify(
+            {'message': 'File copied successfully in /tmp on your local machine.'}), 200
     except NotFound:
         return "Container not found", 404
     except Exception as e:
