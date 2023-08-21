@@ -1,12 +1,25 @@
 $(document).ready(function() {
+    /**
+     * Shows the spinner next to the given button.
+     * 
+     * @param {HTMLElement} button - The button element.
+     */
     function showSpinner(button) {
         $(button).siblings('.spinner-border').show();
     }
 
+    /**
+     * Hides the spinner next to the given button.
+     * 
+     * @param {HTMLElement} button - The button element.
+     */
     function hideSpinner(button) {
         $(button).siblings('.spinner-border').hide();
     }
 
+    /**
+     * Handles the delete image action.
+     */
     $('.delete-image').click(function() {
         let imageId = $(this).data('id');
         
@@ -31,6 +44,9 @@ $(document).ready(function() {
         });
     });
 
+    /**
+     * Handles the pull image action.
+     */
     $(".btn-primary").click(function() {
         var imageName = $(this).closest('tr').find('td:first').text();
         
@@ -51,6 +67,9 @@ $(document).ready(function() {
         });
     });
 
+    /**
+     * Handles the delete containers for a specific image action.
+     */
     $('.delete-containers').click(function() {
         let imageId = $(this).data('id');
         
