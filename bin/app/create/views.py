@@ -51,9 +51,7 @@ def index() -> dict:
         mem_limit = request.form.get('mem_limit')
         name = request.form.get('name')
         initial_command = request.form.get('initial_command')
-        print(f"commande initial : {initial_command}")
 
-        print(volumes)
         try:
             container = client.containers.create(
                 image,
