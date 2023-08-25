@@ -5,17 +5,17 @@ window.onload = function() {
     // Update container details from the API
     function updateContainer() {
         $.get('/container/' + containerId + '/details_api', function(data) {
-            $('#container-name').text('Name: ' + data.name);
+            $('#container-name').text(data.name);
             $('#container-status').text(data.status);
             if (data.status.includes("running")) {
                 $('#container-status').removeClass('text-danger').addClass('text-success');
             } else {
                 $('#container-status').removeClass('text-success').addClass('text-danger');
             }
-            $('#container-image').text('Image: ' + data.image);
-            $('#container-command').text('Command: ' + data.command);
-            $('#container-created').text('Created: ' + new Date(data.created));
-            $('#container-id').text('ID: ' + data.id);
+            $('#container-image').text(data.image);
+            $('#container-command').text(data.command);
+            $('#container-created').text(new Date(data.created));
+            $('#container-id').text(data.id);
             $('#container-networks').text(data.networks ?? "N/A");
             $('#container-mounts').text(data.mounts ?? "N/A");
             $('#container-ports').text(data.ports ?? "N/A");
