@@ -59,32 +59,79 @@ $(document).ready(function() {
     // Handle form submission
     $('#create-form').submit(function(e) {
         e.preventDefault();
+        $('#alert-container').text('').hide(); // Clear any previous error messages
     
         if (currentStep === 1) {
             // Show the loading spinner
             $('#val-bt').hide();
             showSpinner();
-            $('#alert-container').text('').hide();
     
-            // Check the image
-            var image = $('#image-selector').val();
-            $.post('/create/check_image', { image_name: image }, function(response) {
-                if (response.status === 'success') {
+            // Check the container name
+            var containerName = $('input[name=name]').val();
+            $.post('/create/check_container_name', { container_name: containerName }, function(nameResponse) {
+                if (nameResponse.status === 'error') {
                     hideSpinner();
                     $('#val-bt').show();
-    
-                    currentStep++;
-                    showStep(currentStep);
-                } else {
-                    hideSpinner();
-                    $('#val-bt').show();
-                    $('#alert-container').text(response.message).show();
+                    $('#alert-container').text(nameResponse.message).show();
+                    return;
                 }
+    
+                // Check the image if container name is valid
+                var image = $('#image-selector').val();
+                $.post('/create/check_image', { image_name: image }, function(imageResponse) {
+                    hideSpinner();
+                    if (imageResponse.status === 'success') {
+                        $('#val-bt').show();
+                        currentStep++;
+                        showStep(currentStep);
+                    } else {
+                        $('#val-bt').show();
+                        $('#alert-container').text(imageResponse.message).show();
+                    }
+                });
             });
-        } else if (currentStep < totalSteps) {
-            currentStep++;
-            showStep(currentStep);
-        } else {
+        }
+        else if (currentStep === 2) {
+            var env_vars = $('input[name=env_vars]').val();
+            var regex = /^([A-Za-z_][A-Za-z0-9_]*=[^,]+)(,[A-Za-z_][A-Za-z0-9_]*=[^,]+)*$/;
+            if (env_vars && !regex.test(env_vars)) {
+                $('#alert-container').text("Invalid environment variables format. Should be in format KEY1=VALUE1,KEY2=VALUE2,...").show();
+            } else {
+                currentStep++;
+                showStep(currentStep);
+            }
+        } 
+        else if (currentStep === 3) {
+            var volumes = $('input[name=volumes]').val();
+            var regex = /^(\/[\w\-\.]+)+:(\/[\w\-\.]+)+$/;
+            if (volumes && !regex.test(volumes)) {
+                $('#alert-container').text("Invalid volumes format. Should be in format /host/path:/container/path").show();
+            } else {
+                currentStep++;
+                showStep(currentStep);
+            }
+        } 
+        else if (currentStep === 4) {
+            var ports = $('input[name=ports]').val();
+            var regex = /^\d+:\d+$/;
+            if (ports && !regex.test(ports)) {
+                $('#alert-container').text("Invalid ports format. Should be in format 80:8080").show();
+            } else {
+                currentStep++;
+                showStep(currentStep);
+            }
+        } 
+        else if (currentStep === 5) {
+            var mem_limit = $('input[name=mem_limit]').val();
+            var regex = /^(\d+m|\d+g)$/;
+            if (mem_limit && !regex.test(mem_limit)) {
+                $('#alert-container').text("Invalid memory limit format. Example: 512m for 512MB, 1g for 1GB, etc").show();
+            } else {
+                currentStep++;
+                showStep(currentStep);
+            }
+        } 
+        else if (currentStep === 6) {
             var formData = {
                 'image': $('#image-selector').val(),
                 'env_vars': $('input[name=env_vars]').val(),
