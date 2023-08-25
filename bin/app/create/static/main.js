@@ -48,12 +48,40 @@ $(document).ready(function() {
             showStep(currentStep);
         }
     });
+    $('#image-selector').on('input', function() {
+        if ($(this).val()) {
+            $('#val-bt').prop('disabled', false);
+        } else {
+            $('#val-bt').prop('disabled', true);
+        }
+    });
 
     // Handle form submission
     $('#create-form').submit(function(e) {
         e.preventDefault();
-
-        if (currentStep < totalSteps) {
+    
+        if (currentStep === 1) {
+            // Show the loading spinner
+            $('#val-bt').hide();
+            showSpinner();
+            $('#alert-container').text('').hide();
+    
+            // Check the image
+            var image = $('#image-selector').val();
+            $.post('/create/check_image', { image_name: image }, function(response) {
+                if (response.status === 'success') {
+                    hideSpinner();
+                    $('#val-bt').show();
+    
+                    currentStep++;
+                    showStep(currentStep);
+                } else {
+                    hideSpinner();
+                    $('#val-bt').show();
+                    $('#alert-container').text(response.message).show();
+                }
+            });
+        } else if (currentStep < totalSteps) {
             currentStep++;
             showStep(currentStep);
         } else {
@@ -67,9 +95,9 @@ $(document).ready(function() {
                 'name': $('input[name=name]').val(),
                 'initial_command': $('input[name=initial-command]').val()
             };
-
+    
             showSpinner();
-
+    
             $.ajax({
                 type: 'POST',
                 url: '/create',
@@ -78,7 +106,7 @@ $(document).ready(function() {
                 encode: true
             }).done(function(data) {
                 hideSpinner();
-
+    
                 if (data.error) {
                     $('#alert-container').text(data.error).show();
                 } else {
@@ -90,4 +118,5 @@ $(document).ready(function() {
             });
         }
     });
+    
 });

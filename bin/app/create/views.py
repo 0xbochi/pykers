@@ -71,3 +71,16 @@ def index() -> dict:
             return jsonify({'error': str(e)}), 400
 
     return render_template('create.html', images=images)
+
+
+def check_image():
+    image_name = request.form.get('image_name')
+    try:
+        client.images.get(image_name)
+        return jsonify({'status': 'success'})
+    except ImageNotFound:
+        try:
+            client.images.pull(image_name)
+            return jsonify({'status': 'success'})
+        except Exception as e:
+            return jsonify({'status': 'error', 'message': str(e)})
