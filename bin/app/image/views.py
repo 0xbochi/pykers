@@ -102,3 +102,27 @@ def delete_containers_for_image() -> dict:
             return jsonify(error=str(e)), 500
 
     return jsonify(success=True)
+
+
+def pull_image() -> dict:
+    """
+    Pull a Docker image using the name provided in the request.
+
+    This function pulls an image based on the name given in the request form. If successful, 
+    it returns a dictionary with a success status. If there is an exception during the process, 
+    it returns a dictionary with the error status and the exception message.
+
+    Returns:
+        dict: A dictionary indicating the result of the pull operation with either a success 
+              message or an error message.
+    """
+    if request.method != 'POST':
+        return render_template('pull_image.html')
+    
+    image_name = request.form.get('image_name')
+    
+    try:
+        client.images.pull(image_name)
+        return jsonify({'status': 'success', 'message': 'Image pulled successfully.'})
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})

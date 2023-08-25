@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pull Docker Image - Pykers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="bg-dark text-white">
+    <div class="back-container my-4">
+        <a href="/home" class="btn btn-light">Back to home</a>
+    </div>
+    <div class="container text-dark">
+        <h1 class="text-center text-light my-4">Pull Docker Image</h1>
+
+        <form id="pull-image-form" class="text-light ">
+            <div class="form-group">
+                <label for="image-name">Image Name:</label>
+                <input type="text" class="form-control" id="image-name" name="image_name" required placeholder="e.g. alpine:latest">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Pull Image</button>
+            <div id="loading-spinner" class="spinner-border" role="status" style="display:none;">
+                <span class="sr-only">Pulling...</span>
+            </div>
+        </form>
+
+        <div id="alert-container" class="alert alert-danger" role="alert" style="display: none;"></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('image.static', filename='pull_image.js') }}"></script>
+</body>
+</html>
