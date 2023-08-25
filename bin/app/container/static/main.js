@@ -6,7 +6,12 @@ window.onload = function() {
     function updateContainer() {
         $.get('/container/' + containerId + '/details_api', function(data) {
             $('#container-name').text('Name: ' + data.name);
-            $('#container-status').text('Status: ' + data.status);
+            $('#container-status').text(data.status);
+            if (data.status.includes("running")) {
+                $('#container-status').removeClass('text-danger').addClass('text-success');
+            } else {
+                $('#container-status').removeClass('text-success').addClass('text-danger');
+            }
             $('#container-image').text('Image: ' + data.image);
             $('#container-command').text('Command: ' + data.command);
             $('#container-created').text('Created: ' + new Date(data.created));
