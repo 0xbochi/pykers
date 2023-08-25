@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var currentStep = 1;
-    var totalSteps = 5;
+    var totalSteps = 6;
 
     // Show the current step and update the buttons accordingly
     function showStep(step) {
@@ -64,7 +64,8 @@ $(document).ready(function() {
                 'ports': $('input[name=ports]').val(),
                 'links': $('input[name=links]').val(),
                 'mem_limit': $('input[name=mem_limit]').val(),
-                'name': $('input[name=name]').val()
+                'name': $('input[name=name]').val(),
+                'initial_command': $('input[name=initial-command]').val()
             };
 
             showSpinner();
