@@ -3,10 +3,12 @@ $(document).ready(function() {
     var totalSteps = 6;
 
     // Show the current step and update the buttons accordingly
+
     function showStep(step) {
         $('.step').hide();
         $('#step' + step).show();
-
+        $('#step-indicator').text(step + '/6');
+    
         if (currentStep === totalSteps) {
             $('#val-bt').prop('value', 'Create').prop('class', 'btn btn-success');
             $('#back-button').show();
@@ -15,6 +17,7 @@ $(document).ready(function() {
             $('#back-button').toggle(currentStep > 1);
         }
     }
+    
 
     // Show and hide loading spinner
     function showSpinner() {

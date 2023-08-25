@@ -63,3 +63,19 @@ body {
 .navbar-container a:hover {
     background-color: #0056b3; 
 }
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-container h1 {
+    width: 100%;
+    text-align: center;
+}
+
+.text-right {
+    font-size: 1.5em;
+    padding-right: 10px; 
+}

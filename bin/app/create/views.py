@@ -91,11 +91,8 @@ def check_container_name():
     container_name = request.form.get('container_name')
     try:
         DockerClient.from_env().containers.get(container_name)
-        # Si le code atteint ce point, cela signifie que le conteneur existe déjà.
         return jsonify({'status': 'error', 'message': 'Container name already exists.'})
     except NotFound:
-        # Si le conteneur n'existe pas, c'est bon !
         return jsonify({'status': 'success'})
     except Exception as e:
-        # Gérer d'autres erreurs inattendues.
         return jsonify({'status': 'error', 'message': 'An unexpected error occurred: ' + str(e)})

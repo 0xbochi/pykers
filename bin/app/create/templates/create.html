@@ -12,12 +12,20 @@
     </div>
 
     <div class="container text-dark">
+ 
         <input type="button" value="Back" id="back-button" class="btn btn-info" style="display : none;">
 
-        <h1 class="text-center my-4">Create Container</h1>
-        <div id="alert-container" class="alert alert-danger" role="alert" style="display: none;">
-
+        <div class="header-container">
+            <h1 class="text-center my-4">Create Container</h1>
+            <div class="text-right">
+                <span id="step-indicator">1/6</span>
+            </div>
         </div>
+        
+        <div id="alert-container" class="alert alert-danger" role="alert" style="display: none;">
+            
+        </div>
+        
         <form id="create-form" class="text-dark">
             <div class="step active" id="step1">
                 <div class="form-group">
