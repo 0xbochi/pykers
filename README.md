@@ -29,7 +29,7 @@ While other tools provide a ton of features, Pykers focuses on simplicity:
 ```chmod +x pykers.sh```
 3. Run the application:
 ```./pykers.sh```
-4. Open your browser at `http://localhost:5000` and start using Pykers!
+4. Open your browser at `http://localhost:5001` and start using Pykers!
 
 ## 🙌 Contributing
 
