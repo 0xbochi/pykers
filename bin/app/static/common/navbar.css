@@ -1,0 +1,14 @@
+.navbar {
+    background-color: #f8f9fa;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+.navbar a {
+    color: #343a40;
+    text-decoration: none;
+    padding: 10px;
+}
+.navbar a:hover {
+    background-color: #e2e6ea;
+}

@@ -1,5 +1,5 @@
 """Main routing for the entire application"""
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, send_from_directory
 from app.home import home
 from app.container import container
 from app.create import create
@@ -7,7 +7,7 @@ from app.image import image
 from app.port import port
 from app.volume import volume
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
 app.register_blueprint(home, url_prefix='/home')
 app.register_blueprint(container, url_prefix='/container')
 app.register_blueprint(create, url_prefix='/create')
@@ -19,3 +19,7 @@ app.register_blueprint(volume, url_prefix='/volume')
 @app.route('/')
 def root():
     return redirect(url_for('home.index'))
+
+@app.route('/common/static/<path:filename>')
+def common_static(filename):
+    return send_from_directory('app/common/static', filename)
