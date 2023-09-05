@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body class="bg-dark text-white">
+    {% include 'common/_navbar.html' %}
     <div class="back-container my-4">
-        <a href="/home" class="btn btn-light">Back to home</a>
+        <a href="/image" class="btn btn-light">Back to image</a>
     </div>
     <div class="container text-dark">
         <h1 class="text-center text-light my-4">Pull Docker Image</h1>
