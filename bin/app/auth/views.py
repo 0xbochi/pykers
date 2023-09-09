@@ -22,7 +22,7 @@ def login_view():
         
         conn.close()
 
-        if user and bcrypt.checkpw(password, user[2].encode('utf-8')):
+        if user and bcrypt.checkpw(password, user[2]):
             session['logged_in'] = True
             return redirect(url_for('home.index'))
             
