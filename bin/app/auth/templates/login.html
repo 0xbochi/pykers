@@ -19,14 +19,14 @@
                                 <h1 class="h3 mb-3 fw-bold">Pykers</h1>
                             </div>
                             <h5 class="text-center fw-normal mb-4" style="letter-spacing: 1px;">Authentication</h5>
-                            <form>
+                            <form action="/auth/login" method="POST">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
-                                    <input type="text" id="username" class="form-control" placeholder="Username">
+                                    <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" id="password" class="form-control" placeholder="Password">
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                                 </div>
                                 <div class="d-grid gap-2">
                                     <button type="submit" class="btn btn-dark btn-lg">Login</button>

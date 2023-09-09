@@ -1,3 +1,3 @@
 ALLOWED_IPS:
 - 0.0.0.0/0
-AUTH_REQUIRED: false
+AUTH_REQUIRED: true

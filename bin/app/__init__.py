@@ -1,7 +1,7 @@
 """Main routing for the entire application"""
 import yaml
 from ipaddress import ip_network, ip_address
-from flask import Flask, redirect, url_for, send_from_directory, abort, request, Response
+from flask import Flask, redirect, url_for, send_from_directory, abort, request, Response, session
 from app.home import home
 from app.container import container
 from app.create import create
@@ -10,6 +10,8 @@ from app.port import port
 from app.volume import volume
 from app.config import config
 from app.auth import auth
+from os.path import isfile
+import os
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.register_blueprint(home, url_prefix='/home')
@@ -20,6 +22,20 @@ app.register_blueprint(port, url_prefix='/port')
 app.register_blueprint(volume, url_prefix='/volume')
 app.register_blueprint(config, url_prefix='/config')
 app.register_blueprint(auth, url_prefix='/auth')
+
+
+def generate_secret_key():
+    filepath = 'secret_key.txt'
+    if isfile(filepath):
+        with open(filepath, 'r') as f:
+            app.secret_key = f.read()
+    else:
+        new_secret_key = os.urandom(24)
+        with open(filepath, 'wb') as f:
+            f.write(new_secret_key)
+        app.secret_key = new_secret_key
+
+generate_secret_key()
 
 def load_config():
     try:
@@ -41,7 +57,6 @@ def common_static(filename):
 def before_request():
     config = load_config()
 
-    # IP restriction
     try:
         user_ip = ip_address(request.remote_addr)
         if not any(user_ip in ip_network(ip, strict=False) for ip in config['ALLOWED_IPS']):
@@ -50,12 +65,11 @@ def before_request():
         print(f"IP error : {e}")
         abort(403)
 
-    # Authentication
     if config['AUTH_REQUIRED']:
-        auth = request.authorization
-        if auth and auth.username in config['USERS'] and config['USERS'][auth.username] == auth.password:
+        if request.path == '/auth/login':
             return
-        return Response(
-            'Could not verify your access level for that URL.\n'
-            'You have to login with proper credentials', 401,
-            {'WWW-Authenticate': 'Basic realm="Login Required"'})
+        
+        if 'logged_in' in session and session['logged_in']:
+            return
+        else:
+            return redirect(url_for('auth.login_view'))
