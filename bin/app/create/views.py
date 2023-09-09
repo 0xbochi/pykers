@@ -84,7 +84,7 @@ def check_image():
             return jsonify({'status': 'success'})
         except Exception as e:
             return jsonify({'status': 'error', 'message': str(e)})
-        
+
 
 
 def check_container_name():
