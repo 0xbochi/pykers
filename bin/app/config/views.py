@@ -6,11 +6,11 @@ from urllib.parse import unquote
 from ipaddress import ip_network
 
 
-
 def config_view():
     if request.method == 'POST':
-        if 'auth_required' in request.form:
+        if 'auth_required' in request.form or 'auth_config_submit' in request.form:
             auth_required = request.form.get('auth_required') == 'on'
+            print(f"Auth Required: {auth_required}") 
             with open('app/config.yaml', 'r') as file:
                 config = yaml.safe_load(file)
             

@@ -35,10 +35,11 @@
                     <input class="form-check-input" type="checkbox" id="auth-required" name="auth_required" {{ 'checked' if auth_required else '' }}>
                     <label class="form-check-label ms-2" for="auth-required">Require Authentication</label>
                 </div>
+                <input type="hidden" name="auth_config_submit" value="1">
                 <button class="btn btn-primary mt-2" type="submit">Save</button>
             </form>
+            
         </div>
-    </div>
     </div>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="{{ url_for('config.static', filename='main.js') }}"></script>

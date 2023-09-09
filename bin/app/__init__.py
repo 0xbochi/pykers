@@ -27,7 +27,7 @@ app.register_blueprint(auth, url_prefix='/auth')
 def generate_secret_key():
     filepath = 'secret_key.txt'
     if isfile(filepath):
-        with open(filepath, 'r') as f:
+        with open(filepath, 'rb') as f:
             app.secret_key = f.read()
     else:
         new_secret_key = os.urandom(24)
