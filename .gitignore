@@ -38,3 +38,5 @@ build/
 
 pykers-env/
 pykers-env/*
+
+secret_key.txt
