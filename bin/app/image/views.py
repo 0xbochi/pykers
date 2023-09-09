@@ -1,8 +1,6 @@
 """View of image application"""
-from http.client import NOT_FOUND
 from flask import render_template, jsonify, request
 import docker
-from docker.errors import ImageNotFound
 
 
 client = docker.from_env()
@@ -118,9 +116,9 @@ def pull_image() -> dict:
     """
     if request.method != 'POST':
         return render_template('pull_image.html')
-    
+
     image_name = request.form.get('image_name')
-    
+
     try:
         client.images.pull(image_name)
         return jsonify({'status': 'success', 'message': 'Image pulled successfully.'})
