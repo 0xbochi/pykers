@@ -1,5 +1,5 @@
 """Views for create application"""
-from flask import render_template, request, jsonify, redirect, url_for
+from flask import render_template, request, jsonify
 from docker import DockerClient
 from docker.errors import NotFound, ImageNotFound, APIError
 

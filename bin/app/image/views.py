@@ -1,8 +1,6 @@
 """View of image application"""
-from http.client import NOT_FOUND
 from flask import render_template, jsonify, request
 import docker
-from docker.errors import ImageNotFound
 
 
 client = docker.from_env()
