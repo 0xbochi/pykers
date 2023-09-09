@@ -9,6 +9,7 @@ from app.image import image
 from app.port import port
 from app.volume import volume
 from app.config import config
+from app.auth import auth
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.register_blueprint(home, url_prefix='/home')
@@ -18,6 +19,7 @@ app.register_blueprint(image, url_prefix='/image')
 app.register_blueprint(port, url_prefix='/port')
 app.register_blueprint(volume, url_prefix='/volume')
 app.register_blueprint(config, url_prefix='/config')
+app.register_blueprint(auth, url_prefix='/auth')
 
 def load_config():
     try:
