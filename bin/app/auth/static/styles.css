@@ -1,0 +1,21 @@
+body {
+    background-color: #212529;
+    color: #fff;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.list-group-item {
+    border-color: #343a40;
+}
+
+.list-group-item.bg-secondary {
+    background-color: #343a40 !important;
+}
+
+#add-user-form {
+    max-width: 300px;
+    margin: auto;
+}
