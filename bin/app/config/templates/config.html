@@ -12,7 +12,7 @@
     <div class="container text-center">
         <h1 class="mt-4">Configuration</h1>
         <div class="config-section">
-            <h2>Allowed IP Addresses</h2>
+            <h2><i class="fas fa-network-wired"></i> Allowed IP Addresses</h2>
             <form id="ip-config-form" method="post" class="d-flex justify-content-center mb-3">
                 <input type="text" id="ip-address" name="ip_address" class="form-control mr-2" placeholder="192.168.1.0/24" required>
                 <button type="submit" class="btn btn-primary">Add</button>
@@ -26,7 +26,21 @@
                 {% endfor %}
             </ul>
         </div>
+
+        <div class="config-section mt-4">
+            <h2><i class="fas fa-shield-alt"></i>Enable Authentication</h2>
+            <p class="text">Enabling this option will require users to authenticate before accessing any page on the site. It enhances the security by allowing only authorized users to access the site.</p>
+            <form id="auth-config-form" method="post" class="d-flex flex-column align-items-center pt-3">
+                <div class="form-check form-switch d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="auth-required" name="auth_required" {{ 'checked' if auth_required else '' }}>
+                    <label class="form-check-label ms-2" for="auth-required">Require Authentication</label>
+                </div>
+                <button class="btn btn-primary mt-2" type="submit">Save</button>
+            </form>
+        </div>
     </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="{{ url_for('config.static', filename='main.js') }}"></script>
 </body>
 </html>

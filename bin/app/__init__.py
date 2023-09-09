@@ -1,7 +1,7 @@
 """Main routing for the entire application"""
 import yaml
 from ipaddress import ip_network, ip_address
-from flask import Flask, redirect, url_for, send_from_directory, abort, request
+from flask import Flask, redirect, url_for, send_from_directory, abort, request, Response
 from app.home import home
 from app.container import container
 from app.create import create
@@ -19,14 +19,13 @@ app.register_blueprint(port, url_prefix='/port')
 app.register_blueprint(volume, url_prefix='/volume')
 app.register_blueprint(config, url_prefix='/config')
 
-def get_allowed_ips():
+def load_config():
     try:
         with open('app/config.yaml', 'r') as f:
-            config_data = yaml.safe_load(f)
-            return config_data.get('ALLOWED_IPS', [])
+            return yaml.safe_load(f)
     except FileNotFoundError:
         print("File not found")
-        return []
+        return {'ALLOWED_IPS': [], 'AUTH_REQUIRED': False, 'USERS': {}}
 
 @app.route('/')
 def root():
@@ -37,12 +36,24 @@ def common_static(filename):
     return send_from_directory('app/common/static', filename)
 
 @app.before_request
-def limit_remote_addr():
-    ALLOWED_IPS = get_allowed_ips()
+def before_request():
+    config = load_config()
+
+    # IP restriction
     try:
         user_ip = ip_address(request.remote_addr)
-        if not any(user_ip in ip_network(ip, strict=False) for ip in ALLOWED_IPS):
+        if not any(user_ip in ip_network(ip, strict=False) for ip in config['ALLOWED_IPS']):
             abort(403)
     except ValueError as e:
         print(f"IP error : {e}")
         abort(403)
+
+    # Authentication
+    if config['AUTH_REQUIRED']:
+        auth = request.authorization
+        if auth and auth.username in config['USERS'] and config['USERS'][auth.username] == auth.password:
+            return
+        return Response(
+            'Could not verify your access level for that URL.\n'
+            'You have to login with proper credentials', 401,
+            {'WWW-Authenticate': 'Basic realm="Login Required"'})
