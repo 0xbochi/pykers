@@ -60,7 +60,7 @@ check_docker_group() {
         echo -e "[${GREEN}OK${NC}] User is in the docker group."
     else
         echo -e "[${RED}KO${NC}] User is not in the docker group. Adding..."
-        sudo usermod -aG docker $USER
+        sudo usermod -aG docker "$USER"
     fi
 }
 
