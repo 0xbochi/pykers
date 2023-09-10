@@ -7,9 +7,9 @@ NC='\033[0m' # No Color
 
 check_curl() {
     if command -v curl &>/dev/null; then
-        echo -e "[${GREEN}OK${NC}] Curl is installed."
+        echo -e "[${GREEN}OK$NC] Curl is installed."
     else
-        echo -e "[${RED}KO${NC}] Curl is not installed. Attempting to install..."
+        echo -e "[${RED}KO$NC] Curl is not installed. Attempting to install..."
         install_curl
     fi
 }
@@ -24,16 +24,16 @@ install_curl() {
     elif command -v yum &>/dev/null; then
         sudo yum install curl -y
     else
-        echo -e "[${RED}KO${NC}] Package manager not supported. Please install curl manually."
+        echo -e "[${RED}KO$NC] Package manager not supported. Please install curl manually."
         exit 1
     fi
 }
 
 check_docker() {
     if command -v docker &>/dev/null; then
-        echo -e "[${GREEN}OK${NC}] Docker is installed."
+        echo -e "[${GREEN}OK$NC] Docker is installed."
     else
-        echo -e "[${RED}KO${NC}] Docker is not installed. Attempting to install..."
+        echo -e "[${RED}KO$NC] Docker is not installed. Attempting to install..."
         install_docker
     fi
 }
@@ -48,7 +48,7 @@ install_docker() {
     elif command -v yum &>/dev/null; then
         sudo yum install docker -y
     else
-        echo -e "[${RED}KO${NC}] Package manager not supported. Please install Docker manually."
+        echo -e "[${RED}KO$NC] Package manager not supported. Please install Docker manually."
         exit 1
     fi
     sudo systemctl start docker
@@ -57,18 +57,18 @@ install_docker() {
 
 check_docker_group() {
     if id -nG "$USER" | grep -qw docker; then
-        echo -e "[${GREEN}OK${NC}] User is in the docker group."
+        echo -e "[${GREEN}OK$NC] User is in the docker group."
     else
-        echo -e "[${RED}KO${NC}] User is not in the docker group. Adding..."
+        echo -e "[${RED}KO$NC] User is not in the docker group. Adding..."
         sudo usermod -aG docker "$USER"
     fi
 }
 
 check_docker_compose() {
     if command -v docker-compose &>/dev/null; then
-        echo -e "[${GREEN}OK${NC}] Docker Compose is installed."
+        echo -e "[${GREEN}OK$NC] Docker Compose is installed."
     else
-        echo -e "[${RED}KO${NC}] Docker Compose is not installed. Attempting to install..."
+        echo -e "[${RED}KO$NC] Docker Compose is not installed. Attempting to install..."
         install_docker_compose
     fi
 }
@@ -86,7 +86,7 @@ launch_pykers() {
 
     # Check if the service is running on port 5001 using curl
     if curl --output /dev/null --silent --head --fail http://127.0.0.1:5001; then
-        echo -e "[${GREEN}OK${NC}] Pykers is running and accessible!"
+        echo -e "[${GREEN}OK$NC] Pykers is running and accessible!"
         echo "URL: http://127.0.0.1:5001"
 
         # Display the local IP of the machine
@@ -96,14 +96,14 @@ launch_pykers() {
         # Reminder about the container
         echo "Remember, if you kill the container 'pykers-web', you'll need to run this script again to restart the application."
     else
-        echo -e "[${RED}KO${NC}] Failed to access Pykers. Attempting to resolve the issue..."
+        echo -e "[${RED}KO$NC] Failed to access Pykers. Attempting to resolve the issue..."
 
         # Removing the pykers image and trying to relaunch
-        echo -e "[${RED}KO${NC}] Removing the Pykers image..."
+        echo -e "[${RED}KO$NC] Removing the Pykers image..."
         sudo docker image rm -f pykers
 
         # Relaunching docker compose
-        echo -e "[${GREEN}OK${NC}] Trying to relaunch Docker Compose..."
+        echo -e "[${GREEN}OK$NC] Trying to relaunch Docker Compose..."
         sudo docker-compose up -d
 
         # Wait for a few seconds to allow services to start
@@ -111,10 +111,10 @@ launch_pykers() {
 
         # Check again if the service is running
         if curl --output /dev/null --silent --head --fail http://127.0.0.1:5001; then
-            echo -e "[${GREEN}OK${NC}] Pykers is now running and accessible!"
+            echo -e "[${GREEN}OK$NC] Pykers is now running and accessible!"
             echo "URL: http://127.0.0.1:5001"
         else
-            echo -e "[${RED}KO${NC}] Failed to access Pykers after troubleshooting. Please check the service and consult the documentation for further assistance."
+            echo -e "[${RED}KO$NC] Failed to access Pykers after troubleshooting. Please check the service and consult the documentation for further assistance."
         fi
     fi
 }
