@@ -1,5 +1,5 @@
 """View of container application"""
-from flask import render_template, request, jsonify, redirect, url_for, send_file
+from flask import render_template, request, jsonify, redirect, url_for
 from docker import DockerClient
 from docker.errors import NotFound, ImageNotFound
 import os

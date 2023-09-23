@@ -1,0 +1,42 @@
+body {
+    font-family: 'Arial, sans-serif';
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.config-title {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #f8f9fa;
+}
+
+.config-section {
+    background-color: #343a40;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.config-section h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+#ip-config-form {
+    gap: 0.5rem;
+}
+
+#ip-address {
+    width: 80%;
+}
+
+#ip-list {
+    margin-top: 20px;
+}
+
+#ip-list .list-group-item {
+    color: #f8f9fa;
+}
