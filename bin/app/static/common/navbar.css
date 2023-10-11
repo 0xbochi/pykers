@@ -1,0 +1,50 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #343a40;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-size: 24px;
+    color: #f8f9fa;
+    text-decoration: none;
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-menu a {
+    color: #f8f9fa;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.navbar-menu a:hover {
+    color: #007bff;
+}
+
+.navbar-config {
+    cursor: pointer;
+}
+
+.navbar-menu a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    text-align: center;
+}
+
+.navbar-menu a div {
+    display: inline-block;
+}
+
+.navbar-menu a span {
+    display: block;
+    font-size: 0.8em;
+}

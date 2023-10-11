@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ url_for('home.static', filename='styles.css') }}">
 </head>
 <body class="bg-dark text-white">
+    {% include 'common/_navbar.html' %}
     <div class="container">
         
         <h1 class="text-center my-4">Welcome to Pykers</h1>
@@ -18,10 +19,10 @@
             {% for image in last_images %}
                 {% set split_tag = default_tag %}
                 {% if image.tags %}
-                    {% set split_tag = image.tags[0].split(":") %}
+                    {% set split_tag = image.tags[0].split(":") %}  
                 {% endif %}
                 <span class="badge text-bg-primary bg-primary">{{ split_tag[0] }}
-                    <span class="badge rounded-pill text-bg-info bg-info">
+                    <span class="badge rounded-pill text-dark bg-info">
                         {{ split_tag[1] if split_tag|length > 1 else 'latest' }}
                     </span>
                 </span>
@@ -36,7 +37,7 @@
                     All images
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger ">
                     
-                    <span class="visually-hidden">{{ image_count }}</span>
+                    <span class="">{{ image_count }}</span>
                     </span>
                 </a>
             </div>

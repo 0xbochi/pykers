@@ -1,5 +1,5 @@
 """Views for create application"""
-from flask import render_template, request, jsonify, redirect, url_for
+from flask import render_template, request, jsonify
 from docker import DockerClient
 from docker.errors import NotFound, ImageNotFound, APIError
 
@@ -84,7 +84,7 @@ def check_image():
             return jsonify({'status': 'success'})
         except Exception as e:
             return jsonify({'status': 'error', 'message': str(e)})
-        
+
 
 
 def check_container_name():
