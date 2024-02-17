@@ -2,8 +2,7 @@ version: '3'
 
 services:
   pykers:
-    image: pykers:latest
-    build: .
+    image: b0chi/pykers:latest
     container_name: pykers-web
     command: gunicorn -b 0.0.0.0:5000 run:app
     volumes:
