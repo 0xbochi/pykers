@@ -25,9 +25,7 @@ def login_view():
         if user and bcrypt.checkpw(password, user[2]):
             session['logged_in'] = True
             return redirect(url_for('home.index'))
-
-        else:
-            return "Invalid credentials", 401
+        return "Invalid credentials", 401
 
     else:
         return render_template('login.html')
@@ -57,8 +55,7 @@ def resetpasswd_view():
             conn.commit()
             conn.close()
             return "Password updated successfully", 200
-        else:
-            return "Passwords do not match", 400
+        return "Passwords do not match", 400
     else:
         return render_template('reset_password.html')
 

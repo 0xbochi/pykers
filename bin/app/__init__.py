@@ -71,5 +71,4 @@ def before_request():
 
         if 'logged_in' in session and session['logged_in']:
             return
-        else:
-            return redirect(url_for('auth.login_view'))
+        return redirect(url_for('auth.login_view'))
