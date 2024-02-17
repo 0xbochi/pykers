@@ -58,5 +58,4 @@ def delete_ip():
             yaml.safe_dump(config, file)
 
         return jsonify(success=True)
-    else:
-        return jsonify(success=False), 400
+    return jsonify(success=False), 400
