@@ -68,7 +68,7 @@ def before_request():
     if config['AUTH_REQUIRED']:
         if request.path == '/auth/login':
             return
-        
+
         if 'logged_in' in session and session['logged_in']:
             return
         else:

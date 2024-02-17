@@ -16,22 +16,22 @@ def login_view():
 
         conn = sqlite3.connect('app/database.db')
         cursor = conn.cursor()
-        
+
         cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
         user = cursor.fetchone()
-        
+
         conn.close()
 
         if user and bcrypt.checkpw(password, user[2]):
             session['logged_in'] = True
             return redirect(url_for('home.index'))
-            
+
         else:
             return "Invalid credentials", 401
-            
+
     else:
         return render_template('login.html')
-    
+
 
 def users_view():
     conn = sqlite3.connect('app/database.db')
@@ -76,11 +76,11 @@ def new_user_view():
     username = request.form['username']
     password = request.form['password']
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-    
+
     conn = sqlite3.connect('app/database.db')
     cursor = conn.cursor()
     cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_password))
     conn.commit()
     conn.close()
-    
+
     return "User created successfully", 200
